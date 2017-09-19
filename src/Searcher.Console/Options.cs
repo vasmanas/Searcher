@@ -4,7 +4,7 @@ namespace Searcher.Console
 {
     internal class Options
     {
-        [Option('r', "resultFileName", DefaultValue = "Results.txt", Required = true, HelpText = "Results file to write.")]
+        [Option('r', "resultFileName", DefaultValue = "results.txt", Required = true, HelpText = "Results file to write.")]
         public string ResultFileName { get; set; }
 
         [Option('f', "sreachInFolder", Required = true, HelpText = "Folder in which located files for search.")]

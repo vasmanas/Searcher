@@ -13,7 +13,7 @@ namespace Searcher.Core.Tests
         //[TestMethod]
         public void Old_Way_Speed_Test()
         {
-            var filePath = @"C:\work\e470ProdLogs20170915\original\SFH1\E470-DMVManRequestAPI-Error.log";
+            var filePath = @"C:\logs\20170915\Service-Error.log";
 
             var timer = new Stopwatch();
 

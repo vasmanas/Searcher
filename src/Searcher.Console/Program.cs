@@ -13,7 +13,7 @@ namespace Searcher.Console
     {
         public static void Main(string[] args)
         {
-            /// -r ".\debug_results.txt" -f "C:\work\e470ProdLogs\original\20170914" -s ".\missingWorkflowIds_20170914.txt" -t 16 -v
+            /// -r ".\debug_results.txt" -f "C:\logs\20170914" -s ".\searchables.txt" -t 16 -v
 
             var options = new Options();
             if (Parser.Default.ParseArguments(args, options))
