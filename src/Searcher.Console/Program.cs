@@ -13,7 +13,7 @@ namespace Searcher.Console
     {
         public static void Main(string[] args)
         {
-            /// -r ".\debug_results.txt" -f "C:\logs\20170914" -s ".\searchables.txt" -t 16 -v
+            // -r ".\debug_results.txt" -f "C:\work\original" -s ".\find_keys.txt" -t 16 -l -v
 
             var options = new Options();
             if (Parser.Default.ParseArguments(args, options))
@@ -22,7 +22,7 @@ namespace Searcher.Console
                 if (options.Verbose)
                 {
                     System.Console.WriteLine($"{nameof(options.ResultFileName)} - {options.ResultFileName}");
-                    System.Console.WriteLine($"{nameof(options.SearchablesFileName)} - {options.SearchablesFileName}");
+                    System.Console.WriteLine($"{nameof(options.SreachInFolder)} - {options.SreachInFolder}");
                     System.Console.WriteLine($"{nameof(options.SearchablesFileName)} - {options.SearchablesFileName}");
                     System.Console.WriteLine($"{nameof(options.ThreadCount)} - {options.ThreadCount}");
                     System.Console.WriteLine($"{nameof(options.WriteFoundLine)} - {options.WriteFoundLine}");

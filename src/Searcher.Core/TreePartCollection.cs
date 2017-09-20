@@ -38,9 +38,14 @@ namespace Searcher.Core
 
                 var result = leaf.IsSatisfiedDeepBy(value);
                 
+                if (result == -1)
+                {
+                    continue;
+                }
+
                 if (this._findLongest)
                 {
-                    if (result >= 0 && longestResult < result)
+                    if (longestResult < result)
                     {
                         longestResult = result;
                     }
