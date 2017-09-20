@@ -21,10 +21,11 @@ namespace Searcher.Console
                 // consume Options instance properties
                 if (options.Verbose)
                 {
-                    System.Console.WriteLine(options.ResultFileName);
-                    System.Console.WriteLine(options.SearchablesFileName);
-                    System.Console.WriteLine(options.SreachInFolder);
-                    System.Console.WriteLine(options.ThreadCount);
+                    System.Console.WriteLine($"{nameof(options.ResultFileName)} - {options.ResultFileName}");
+                    System.Console.WriteLine($"{nameof(options.SearchablesFileName)} - {options.SearchablesFileName}");
+                    System.Console.WriteLine($"{nameof(options.SearchablesFileName)} - {options.SearchablesFileName}");
+                    System.Console.WriteLine($"{nameof(options.ThreadCount)} - {options.ThreadCount}");
+                    System.Console.WriteLine($"{nameof(options.WriteFoundLine)} - {options.WriteFoundLine}");
                 }
                 else
                 {
@@ -60,7 +61,7 @@ namespace Searcher.Console
 
             using (var resultsFile = new StreamWriter(logFileName, false))
             {
-                var tasks = new List<Task<FoundKeyResponse>>();
+                var tasks = new List<Task<FileSearchResults>>();
 
                 foreach (var logFilePath in logFilePaths)
                 {
@@ -71,7 +72,7 @@ namespace Searcher.Console
                         Task.WaitAny(tasks.ToArray());
                     }
 
-                    WriteResult(tasks, resultsFile);
+                    WriteResult(tasks, resultsFile, options);
 
                     var runTask = search.Go(logFilePath);
                     tasks.Add(runTask);
@@ -81,7 +82,7 @@ namespace Searcher.Console
                 {
                     Task.WaitAny(tasks.ToArray());
 
-                    WriteResult(tasks, resultsFile);
+                    WriteResult(tasks, resultsFile, options);
                 }
             }
 
@@ -90,17 +91,29 @@ namespace Searcher.Console
             System.Console.ReadKey();
         }
 
-        public static void WriteResult(List<Task<FoundKeyResponse>> tasks, StreamWriter resultsFile)
+        internal static void WriteResult(List<Task<FileSearchResults>> tasks, StreamWriter resultsFile, Options options)
         {
             foreach (var task in tasks.Where(t => t.IsCompleted).ToList())
             {
                 var taskResult = task.Result;
                 var filePath = taskResult.FilePath;
 
-                foreach (var key in taskResult.Keys)
+                if (!taskResult.FoundedLines.Any())
                 {
-                    resultsFile.WriteLine($"{filePath}:{key}");
+                    tasks.Remove(task);
                 }
+
+                foreach (var foundLine in taskResult.FoundedLines)
+                {
+                    resultsFile.WriteLine($"{filePath}:{foundLine.Keyword}:{foundLine.LineNumber}");
+
+                    if (options.WriteFoundLine)
+                    {
+                        resultsFile.WriteLine(foundLine.LineText);
+                    }
+                }
+
+                resultsFile.Flush();
 
                 tasks.Remove(task);
             }

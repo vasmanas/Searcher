@@ -40,7 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FoundKeyResponse.cs" />
+    <Compile Include="FileSearchResults.cs" />
+    <Compile Include="FoundLine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SlidingSearch.cs" />
     <Compile Include="TreeBuilder.cs" />

@@ -25,13 +25,12 @@ namespace Searcher.Core
             }
         }
 
-        public Task<FoundKeyResponse> Go(string filePath)
+        public Task<FileSearchResults> Go(string filePath)
         {
-            return Task<FoundKeyResponse>.Factory.StartNew(() =>
+            return Task<FileSearchResults>.Factory.StartNew(() =>
             {
                 var allLines = File.ReadAllLines(filePath);
-
-                var foundKeys = new List<string>();
+                var result = new FileSearchResults(filePath);
 
                 for (int i = 0; i < allLines.Length; i++)
                 {
@@ -47,17 +46,13 @@ namespace Searcher.Core
                             continue;
                         }
 
-                        foundKeys.Add(line.Substring(j, startLength));
+                        var keyword = line.Substring(j, startLength);
+                        var foundLine = new FoundLine(keyword, j + 1, line);
+                        result.FoundedLines.Add(foundLine);
 
                         j += (startLength - 1);
                     }
                 }
-
-                var result = new FoundKeyResponse
-                {
-                    FilePath = filePath,
-                    Keys = foundKeys.Distinct().ToList()
-                };
 
                 return result;
             });
