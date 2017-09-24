@@ -19,6 +19,9 @@ namespace Searcher.Console
         [Option('l', "writeFoundLine", HelpText = "Write out found line after position")]
         public bool WriteFoundLine { get; set; }
 
+        [Option('o', "writeOrdered", HelpText = "Write ordered lines by search term")]
+        public bool WriteOrdered { get; set; }
+
         [Option('v', null, HelpText = "Print details during execution.")]
         public bool Verbose { get; set; }
     }

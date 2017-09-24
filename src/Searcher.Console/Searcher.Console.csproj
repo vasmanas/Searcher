@@ -45,7 +45,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DirectFileWriteDumper.cs" />
+    <Compile Include="IDumper.cs" />
     <Compile Include="Options.cs" />
+    <Compile Include="OrderedFileWriteDumper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
