@@ -10,6 +10,9 @@ namespace Searcher.Console
         [Option('f', "sreachInFolder", Required = true, HelpText = "Folder in which located files for search.")]
         public string SreachInFolder { get; set; }
 
+        [Option('p', "sreachFilePattern", DefaultValue = "*.*", HelpText = "Search file pattern")]
+        public string SreachFilePattern { get; set; }
+
         [Option('s', "searchablesFileName", Required = true, HelpText = "File from which search keys to take.")]
         public string SearchablesFileName { get; set; }
 

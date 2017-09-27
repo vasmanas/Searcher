@@ -23,6 +23,7 @@ namespace Searcher.Console
                 {
                     System.Console.WriteLine($"{nameof(options.ResultFileName)} - {options.ResultFileName}");
                     System.Console.WriteLine($"{nameof(options.SreachInFolder)} - {options.SreachInFolder}");
+                    System.Console.WriteLine($"{nameof(options.SreachFilePattern)} - {options.SreachFilePattern}");
                     System.Console.WriteLine($"{nameof(options.SearchablesFileName)} - {options.SearchablesFileName}");
                     System.Console.WriteLine($"{nameof(options.ThreadCount)} - {options.ThreadCount}");
                     System.Console.WriteLine($"{nameof(options.WriteFoundLine)} - {options.WriteFoundLine}");
@@ -55,7 +56,10 @@ namespace Searcher.Console
             var allSearchables = File.ReadAllLines(options.SearchablesFileName);
             var search = new SlidingSearch(allSearchables);
 
-            var scanFilePaths = Directory.EnumerateFiles(scanFileStorageFolderPath, "*.*", SearchOption.AllDirectories).ToList();
+            var scanFilePaths = Directory.EnumerateFiles(
+                scanFileStorageFolderPath,
+                string.IsNullOrEmpty(options.SreachFilePattern) ? "*.*" : options.SreachFilePattern,
+                SearchOption.AllDirectories).ToList();
             var tasks = new List<Task<FileSearchResults>>();
 
             using (IDumper resultWriter =
