@@ -47,7 +47,7 @@ namespace Searcher.Core
                         }
 
                         var keyword = line.Substring(j, startLength);
-                        var foundLine = new FoundLine(keyword, j + 1, line);
+                        var foundLine = new FoundLine(keyword, i + 1, line);
                         result.FoundedLines.Add(foundLine);
 
                         j += (startLength - 1);
