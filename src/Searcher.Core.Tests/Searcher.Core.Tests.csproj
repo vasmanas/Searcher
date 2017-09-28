@@ -51,6 +51,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OrderedFileWriteDumperTests.cs" />
     <Compile Include="SlidingSearchTests.cs" />
     <Compile Include="SpeedTests.cs" />
     <Compile Include="TreeBuilderTests.cs" />

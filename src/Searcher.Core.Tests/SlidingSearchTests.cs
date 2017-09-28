@@ -7,7 +7,8 @@ namespace Searcher.Core.Tests
     [TestClass]
     public class SlidingSearchTests
     {
-        //[TestMethod]
+        [TestMethod]
+        [Ignore]
         public void Speed_Test()
         {
             var filePath = @"C:\logs\20170914\Service-Error.log";
