@@ -43,6 +43,7 @@ namespace Searcher.Console
                 var ordered = this.allResults
                     .SelectMany(r => r.FoundedLines, (r, s) => new { r.FilePath, s.Keyword, s.LineNumber, s.LineText })
                     .OrderBy(r => r.Keyword)
+                    .ThenBy(r => r.LineText)
                     .ToList();
 
                 foreach (var foundLine in ordered)
